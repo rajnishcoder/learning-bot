@@ -29,6 +29,9 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+*{
+    box-sizing: border-box;
+}
 ol, ul {
 	list-style: none;
 }
@@ -45,5 +48,18 @@ table {
 	border-spacing: 0;
 }
 /* end reset */
-
-
+.mainWrap
+        {
+            float: left;
+            width: 100%;
+        }
+.fullWrap
+        {
+            float: left;
+            width: 100%;
+        }
+.halfWrap
+        {
+            float: left;
+            width: 50%;
+        }
