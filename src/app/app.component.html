@@ -1,5 +1,5 @@
 <!-- the initial bot test -->
-<!-- test -->
+
 <div class="mainWrap">
 	<div class="chatMid">
 		<div class="chatBoxMain">
@@ -23,7 +23,8 @@
 				</ul>
 			</div>
 			<div class="chatInputMain">
-				<input type="text" name="" id="">
+				<input type="text" name="" id="" [ngModel]="mainUserInput"
+				(keyup.enter)="onInputEnter(mainUserInput)">
 			</div>
 		</div>
 	</div>
