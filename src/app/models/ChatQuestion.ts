@@ -1,6 +1,7 @@
+import { Category } from './Category';
 
-class ChatQuestion {
-    answer: string;
+export class ChatQuestion {
+    question: string;
     id: string;
-    category: string;
+    category: Category;
 }
