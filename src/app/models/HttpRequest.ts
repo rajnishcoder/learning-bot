@@ -6,7 +6,7 @@ import { HttpRequest } from '../models/HttpRequest';
 
 // import 'rxjs/add/operator/timeout';
 @Injectable()
-export class CommonServices{
+export class CommonServices {
 	constructor(
 		private http: Http
 	) {}
@@ -15,23 +15,23 @@ export class CommonServices{
         const sideBarCss = 'margin-left:0;width:100%;';
         const sideBar = document.getElementById('sideBar');
         if (sideBar) {
-            sideBar.style.display = "none";
+            sideBar.style.display = 'none';
         }
         document.getElementById('rightMainWrap').style.cssText = sideBarCss;
-        document.getElementById('logOutBtn').style.display = "none";
+        document.getElementById('logOutBtn').style.display = 'none';
     }
 
-    showSideBar(){
+    showSideBar() {
     	const sideBar = document.getElementById('sideBar');
-        sideBar.style.display = "block";
+        sideBar.style.display = 'block';
         document.getElementById('rightMainWrap').removeAttribute('style');
-        document.getElementById('logOutBtn').style.display = "block";
+        document.getElementById('logOutBtn').style.display = 'block';
     }
 
-	getApi(url: any){
+	getApi(url: any) {
 
-		let req = new HttpRequest(url as string)
-		return this.callAPI(req)				
+		let req = new HttpRequest(url as string);
+		return this.callAPI(req);
 		// console.log("data"+data);
 		// var data2 = this.http.get("http://52.26.27.78:8080/aboutstays/hotel/sample").map(res => res.json());
 		// console.log(data2);http://35.154.72.39:8080/syntagi/prescription/find/patient?patientId=59312567e4b0315ae6859810
