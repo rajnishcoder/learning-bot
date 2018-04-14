@@ -2,7 +2,7 @@ import { StorageUtil } from './StorageUtil';
 import { OnInit } from '@angular/core';
 import { CommonServices } from '../services/common.service';
 import { TaskCode } from '../globals';
-import { BaseResponse } from '../models/BaseResponse';
+import { BaseModelResponse } from '../models/BaseModelResponse';
 // import { Logger } from './utils/Logger';
 import { HttpRequest, HttpGenericRequest } from './models/HttpRequest';
 import { DownloadManager } from './DownloadManager';

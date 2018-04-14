@@ -1,89 +1,68 @@
-import { StorageUtil } from './../framework/StorageUtil';
-import { Injectable } from '@angular/core';
+import { BaseModelResponse } from './BaseModelResponse';
 import { Http, Request, RequestMethod, Response, Headers, RequestOptions } from '@angular/http';
-import { HttpRequest } from '../models/HttpRequest';
-// import { Router } from "@angular/router";
+import { ClassType } from 'class-transformer/ClassTransformer';
 
-// import 'rxjs/add/operator/timeout';
-@Injectable()
-export class CommonServices {
-	constructor(
-		private http: Http
-	) {}
+export class HttpRequest  {
+	url: string;
+	params: any;
+	taskCode: number;
+    headers: Headers;
+	method: string;
+	classTypeValue: ClassType<any> = BaseModelResponse;
+	isArrayResponse: false;
+	storageKeyName: string;
 
-	hideSideBar() {
-        const sideBarCss = 'margin-left:0;width:100%;';
-        const sideBar = document.getElementById('sideBar');
-        if (sideBar) {
-            sideBar.style.display = 'none';
-        }
-        document.getElementById('rightMainWrap').style.cssText = sideBarCss;
-        document.getElementById('logOutBtn').style.display = 'none';
+
+	constructor(url: string) {
+		this.url = url;
+		this.method = 'GET';
+		this.headers = new Headers();
+        this.addDefaultHeaders();
+	}
+
+	addDefaultHeaders() {
+		this.addHeader('Content-Type', 'application/json');
+		// for production
+		this.addHeader('authToken', localStorage.getItem('loginT'));
+		this.addHeader('roleType', '1');
+		// for testing
+		// this.addHeader('authToken', '12345678');
+		// this.addHeader('roleType', '4');
+	}
+
+	removeDefaultHeaders() {
+		this.removeHeader('authToken');
+		this.removeHeader('roleType');
+		this.removeHeader('Content-Type');
+	}
+
+	removeHeader(key: string) {
+		this.headers.delete(key);
+	}
+
+	setPostMethod() {
+		this.method = 'POST';
+	}
+
+	setPutMethod() {
+		this.method = 'PUT';
+	}
+
+	setPatchMethod() {
+		this.method = 'PATCH';
+	}
+
+	setDeleteMethod() {
+		this.method = 'DELETE';
+	}
+
+	addHeader(key: string, value: string) {
+		this.headers.append(key, value);
+	}
+}
+export class HttpGenericRequest<T> extends HttpRequest {
+    classType: ClassType<T>;
+    constructor(url: string) {
+        super(url);
     }
-
-    showSideBar() {
-    	const sideBar = document.getElementById('sideBar');
-        sideBar.style.display = 'block';
-        document.getElementById('rightMainWrap').removeAttribute('style');
-        document.getElementById('logOutBtn').style.display = 'block';
-    }
-
-	getApi(url: any) {
-
-		let req = new HttpRequest(url as string);
-		return this.callAPI(req);
-		// console.log("data"+data);
-		// var data2 = this.http.get("http://52.26.27.78:8080/aboutstays/hotel/sample").map(res => res.json());
-		// console.log(data2);http://35.154.72.39:8080/syntagi/prescription/find/patient?patientId=59312567e4b0315ae6859810
-		// return data;
-	}
-
-	callAPI(req : HttpRequest){
-		let method = req.method;
-		let options = new RequestOptions({ headers: req.headers});
-		if (method == "GET"){
-		return this.http.get(req.url, options)
-						.map(res => res.json())
-		}else if (method == "POST"){
-			return this.http.post(req.url, req.params, options)
-                    .map(res => res.json());
-		}else if (method == "PUT"){
-			return this.http.put(req.url, req.params, options)
-                    .map(res => res.json());
-		}else if (method == "DELETE"){
-			return this.http.delete(req.url, options)
-                    .map(res => res.json());
-		}else if (method == "PATCH"){
-			return this.http.patch(req.url, req.params, options)
-                    .map(res => res.json());
-		}	
-	}
-
-
-	throwError(error: any){
-      	if (error != "") {
-	      	// alert("Server Error\n"+ error );
-	    	console.log(error);
-      	}
-      	// to check 401 authentication, if true logout.
-      	if (error == 'Token is either invalid or expired!') {
-      		localStorage.removeItem('loginDetails');
-      		window.location.reload();
-      	}
-  	}
-	showCommonLoader(){
-		const elem = document.getElementById('commonFullLoader');
-		if (elem) {
-			elem.style.display = "block";
-		}		
-	}
-	hideCommonLoader(){
-		const elem = document.getElementById('commonFullLoader');
-		if (elem) {
-			elem.style.display = "none";
-		}		
-	}
-
-	
-
 }
