@@ -44,8 +44,6 @@ export class BaseComponent implements OnInit {
 
     onPreExecute(taskCode: TaskCode) {
         switch (taskCode) {
-            case TaskCode.SNOMED_SEARCH:
-                break;
             default:
                 this.showCommonLoader(taskCode);
                 break;
