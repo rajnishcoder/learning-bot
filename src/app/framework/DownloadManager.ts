@@ -1,6 +1,6 @@
+import { CommonServices } from './../services/common.service';
 import { StorageUtil } from './StorageUtil';
 import { HttpRequest, HttpGenericRequest } from '../models/HttpRequest';
-import { CommonServices } from '../services/common.service';
 import { BaseComponent } from './BaseCompo';
 import { Http } from '@angular/http';
 import { ApiGenerator, JsonParser } from './ApiGenerator';
