@@ -23,11 +23,11 @@ export class HttpRequest  {
 	addDefaultHeaders() {
 		this.addHeader('Content-Type', 'application/json');
 		// for production
-		this.addHeader('authToken', localStorage.getItem('loginT'));
-		this.addHeader('roleType', '1');
+		// this.addHeader('authToken', localStorage.getItem('loginT'));
+		// this.addHeader('roleType', '1');
 		// for testing
-		// this.addHeader('authToken', '12345678');
-		// this.addHeader('roleType', '4');
+		this.addHeader('authToken', '12345678');
+		this.addHeader('roleType', '4');
 	}
 
 	removeDefaultHeaders() {
