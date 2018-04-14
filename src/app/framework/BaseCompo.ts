@@ -4,14 +4,12 @@ import { CommonServices } from '../services/common.service';
 import { TaskCode } from '../globals';
 import { BaseResponse } from '../models/BaseResponse';
 // import { Logger } from './utils/Logger';
-import { HttpRequest, HttpGenericRequest } from '../models/HttpRequest';
+import { HttpRequest, HttpGenericRequest } from './models/HttpRequest';
 import { DownloadManager } from './DownloadManager';
 import { Router } from '@angular/router/src/router';
 
 export class BaseComponent implements OnInit {
 
-    onlineStatus: boolean = navigator.onLine;
-    
     constructor(protected commonService: CommonServices, protected router: Router) { }
 
     ngOnInit() {
@@ -23,7 +21,7 @@ export class BaseComponent implements OnInit {
         manager.downloadData(req);
     }
 
-    checkOnline(){
+    checkOnline() {
         return true;
     }
 
@@ -31,18 +29,17 @@ export class BaseComponent implements OnInit {
     checkLocalStorage(req: HttpRequest) {
         if (req.storageKeyName) {
             const response = StorageUtil.getConvertedObjFromLocalStorage(req.storageKeyName, req.classTypeValue);
-            if (response){
+            if (response) {
                 this.onResponseReceived(req.taskCode, response);
             }
-            
         }
     }
 
-    showCommonLoader(taskCode: TaskCode){
-		document.getElementById('commonFullLoader').style.display = "block";		
+    showCommonLoader(taskCode: TaskCode) {
+		document.getElementById('commonFullLoader').style.display = 'block';
 	}
-	hideCommonLoader(taskCode: TaskCode){
-		document.getElementById('commonFullLoader').style.display = "none";
+	hideCommonLoader(taskCode: TaskCode) {
+		document.getElementById('commonFullLoader').style.display = 'none';
 	}
 
     onPreExecute(taskCode: TaskCode) {
@@ -70,14 +67,11 @@ export class BaseComponent implements OnInit {
     }
     onTokenInvalid(response: any) {
         alert(response.message);
-        this.logOut();
+        // log out here
     }
     
     onApiError(taskCode: TaskCode, response: any) {
     }
 
-    logOut(){
-        StorageUtil.clearAll();
-        this.router.navigate(['/login']);
-    }
+    
 }
